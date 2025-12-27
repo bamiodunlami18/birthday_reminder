@@ -1,5 +1,4 @@
 const db = require('../configs/db.js');
-const validator = require('validator');
 
 const dateSchema = new db.Schema({
   user_id: {
@@ -7,31 +6,17 @@ const dateSchema = new db.Schema({
     ref: 'User',
   },
 
-  date: {
+  day: {
     type: String,
-    validator: {
-      validator: (item) => {
-        validator.isDate(item);
-      },
-    },
+  },
+  month: {
+    type: String,
+  },
+  year: {
+    type: String,
   },
 });
 
-const Birthdate = db.model('Birthdate', dateSchema);
+const Birthdate = new db.model('Birthdate', dateSchema);
 
-async function createDate() {
-  const date = new Birthae({
-    user_id: '694ae4630da32ec34c80da81',
-    date: new Date(Date.now()).toJSON(),
-  });
-
-  await date.save();
-  console.log(date)
-}
-
-// createDate();
-
-module.exports = {
-  Birthdate,
-  createDate,
-};
+module.exports = Birthdate;

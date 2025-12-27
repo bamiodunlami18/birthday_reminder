@@ -4,12 +4,33 @@
   box-sizing: border-box;
 }
 
-.birthday-tab{
-    background-color: #FFF8F5;
-    height: 100vh;
+.hidden {
+  display: none;
 }
 
-.primary-color{
-    color:#ffa600
+.birthday-tab,
+.response-tab {
+  background-color: #fff8f5;
+  padding: 20px;
 }
 
+.primary-color {
+  color: #ffa600;
+}
+.secondary-color {
+  color: #ffffff;
+}
+.main-block {
+  height: 100vh;
+  align-items: center;
+}
+
+.form-block {
+  padding: 20px;
+  background-color: #ffa600;
+  border-radius: 10px;
+}
+
+.submit-btn {
+  width: 100%;
+}

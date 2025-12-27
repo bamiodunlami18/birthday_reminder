@@ -19,16 +19,5 @@ const userSchema = new db.Schema({
 
 const User = new db.model('User', userSchema);
 
-async function createUser() {
-  const user = User({
-    username: 'bamiodunlami',
-    email: 'bamiddle@gmail.com',
-  });
-
-  await user.save();
-  console.log(user);
-}
-
-// createUser();
 
 module.exports = User;
