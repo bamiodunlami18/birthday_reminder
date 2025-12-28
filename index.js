@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 // const ejs = require('ejs');
 const { rateLimit } = require('express-rate-limit');
 const path = require('path');
@@ -12,9 +13,9 @@ const app = express();
 const db = require('./configs/db.js');
 const userDb = require('./models/user.model.js');
 const dateDb = require('./models/date.model.js');
-
 const validator = require('./services/validator.services.js');
-const bodyParser = require('body-parser');
+const cron = require('./services/cron.services.js');
+const { confirmation } = require('./services/email.services.js');
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -61,17 +62,14 @@ app.post('/creat-birthday', validator, async (req, res) => {
     const saveUser = new userDb({
       username: username,
       email: email,
-    });
-    await saveUser.save();
-
-    //save date
-    const saveDob = new dateDb({
-      user_id: saveUser._id,
       year: dob.slice(0, 4),
       month: dob.slice(5, 7),
       day: dob.slice(8, 10),
     });
-    await saveDob.save();
+
+    await saveUser.save();
+
+    confirmation(saveUser.email, saveUser.username);
 
     return res.send({
       success: true,

@@ -15,9 +15,21 @@ const userSchema = new db.Schema({
       },
     },
   },
+  day: {
+    type: String,
+  },
+  month: {
+    type: String,
+  },
+  year: {
+    type: String,
+  },
+  create_at: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const User = new db.model('User', userSchema);
-
 
 module.exports = User;
