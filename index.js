@@ -9,6 +9,7 @@ const path = require('path');
 global.appRoot = path.resolve(__dirname);
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 const db = require('./configs/db.js');
 const userDb = require('./models/user.model.js');
@@ -40,7 +41,7 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
-const PORT = process.env.port || 3000;
+
 
 app.get('/', (req, res) => {
   res.render('index');
