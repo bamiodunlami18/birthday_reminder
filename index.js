@@ -28,15 +28,15 @@ app.use(
 );
 app.use(morgan('tiny'));
 app.use(express.json());
-// app.use(
-//   rateLimit({
-//     windowMs: 10 * 60 * 1000,
-//     limit: 20,
-//     standardHeaders: 'draft-8',
-//     legacyHeaders: false,
-//     ipv6Subnet: 56,
-//   })
-// );
+app.use(
+  rateLimit({
+    windowMs: 10 * 60 * 1000,
+    limit: 20,
+    standardHeaders: 'draft-8',
+    legacyHeaders: false,
+    ipv6Subnet: 56,
+  })
+);
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
